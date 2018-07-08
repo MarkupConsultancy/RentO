@@ -20,13 +20,40 @@
     </style>
 </head>
 <body>
+    <div>
+        <input id="searchText" type="text" />
+        <input type="button" id="search" style="width: 120px; height: 25px;" value="Search Property" onclick="searchPlaces();" />
+    </div>
     <div id="map"></div>
     <script>
         function initMap() {
+            var currentLatitude = 19.0760;
+            var currentLongitude = 72.8777;
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        currentLatitude = position.coords.latitude;
+                        currentLongitude = position.coords.longitude;
+                        locationAjax(currentLatitude, currentLongitude);
+                    },
+                    (error) => {
+                        locationAjax(currentLatitude, currentLongitude);
+                    },
+                    {
+                        timeout: 5000
+                    });
+            } else {
+                locationAjax(currentLatitude, currentLongitude);
+            }
+        }
+
+        function locationAjax(currentLatitude, currentLongitude) {
             var data = {
-                Latitude: 23.2156,
-                Longitude: 72.6369
+                Latitude: currentLatitude,
+                Longitude: currentLongitude
             };
+
             $.ajax({
                 url: '@Url.Content("~/Home/Index")',
                 type: 'POST',
@@ -56,7 +83,7 @@
                     var infowindow = new google.maps.InfoWindow({
                         content: contentString
                     });
-
+                    
                     var map = new google.maps.Map(document.getElementById('map'), {
                         center: { lat: data.Latitude, lng: data.Longitude },
                         zoom: 13
@@ -83,7 +110,15 @@
                 position: latLng,
                 map: map
             });
-            //map.panTo(latLng);
+            map.panTo(latLng);
+        }
+
+        function searchPlaces() {
+            var marker = new google.maps.Marker({
+                position: latLng,
+                map: map
+            });
+            map.panTo(latLng);
         }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAyTJrODYxJimFuICozf7XSzzPsfUTCTcU&callback=initMap" async defer></script>
