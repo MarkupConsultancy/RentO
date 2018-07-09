@@ -5,6 +5,7 @@
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <style>
         /* Always set the map height explicitly to define the size of the div
         * element that contains the map. */
@@ -26,8 +27,8 @@
     </style>
 </head>
 <body>
-    <input id="searchText" type="text" />
     <div id="map"></div>
+    <input id="searchText" class="form-control" type="text" placeholder="Please enter address or city" />
     <button id="addProperty" type="button">Add property</button>
     <script>
         var map;
