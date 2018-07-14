@@ -1,34 +1,26 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <title>Simple Map</title>
-    <meta name="viewport" content="initial-scale=1.0">
-    <meta charset="utf-8">
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+﻿
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section HeadTag {
     <style>
         /* Always set the map height explicitly to define the size of the div
         * element that contains the map. */
         #map {
-            height: 100%;
-        }
-        /* Optional: Makes the sample page fill the window. */
-        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
+            height: 82%;
         }
 
-        #addProperty {
-            position: fixed;
-            bottom: 150px;
-            right: 10px;
+        #searchText {
+            margin-top: 10px;
+            width: 600px;
         }
     </style>
-</head>
-<body>
-    <input id="searchText" type="text" />
-    <div id="map"></div>
-    <button id="addProperty" type="button">Add property</button>
+}
+<input id="searchText" type="text" class="form-control" />
+<div id="map"></div>
+@section BodyScripts {
     <script>
         var map;
         var mapType = 'VIEW';
@@ -158,5 +150,4 @@
         }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAyTJrODYxJimFuICozf7XSzzPsfUTCTcU&callback=initMap&libraries=places" async defer></script>
-</body>
-</html>
+}
